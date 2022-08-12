@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="640" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="600" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#003333"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#003333"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFF4E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#003333"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#003333"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#FFFCF8"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="tabela">
+		<parameter name="venda" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[4]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     tbcliente.`nome` AS tbcliente_nome,
+     tbcliente.`telefone` AS tbcliente_telefone,	
+     tbitemvenda.`quantidade` AS tbitemvenda_quantidade,
+     tbitemvenda.`preco` AS tbitemvenda_preco,
+     tbitemvenda.`total` AS tbitemvenda_total,
+     tbitemvenda.`venda` AS tbitemvenda_venda,
+     tbvenda.`id` AS tbvenda_id,
+     tbvenda.`pagamento` AS tbvenda_pagamento,
+     tbvenda.`subtotal` AS tbvenda_subtotal,
+     tbvenda.`desconto` AS tbvenda_desconto,
+     tbvenda.`taxa` AS tbvenda_taxa,
+     tbvenda.`total` AS tbvenda_total,
+     tbvenda.`troco` AS tbvenda_troco,
+     tbvenda.`data` AS tbvenda_data,
+     tbvenda.`hora` AS tbvenda_hora,
+     tbproduto.`nome` AS tbproduto_nome
+FROM
+     `tbcliente` tbcliente,
+     `tbitemvenda` tbitemvenda,
+     `tbvenda` tbvenda,
+     `tbproduto` tbproduto
+WHERE
+     tbvenda.id =$P{venda}
+AND
+     tbitemvenda.venda=tbvenda.id
+AND
+     tbproduto.id=tbitemvenda.produto]]>
+		</queryString>
+		<field name="tbcliente_nome" class="java.lang.String"/>
+		<field name="tbcliente_telefone" class="java.lang.String"/>
+		<field name="tbitemvenda_quantidade" class="java.lang.Integer"/>
+		<field name="tbitemvenda_preco" class="java.math.BigDecimal"/>
+		<field name="tbitemvenda_total" class="java.math.BigDecimal"/>
+		<field name="tbitemvenda_venda" class="java.lang.Integer"/>
+		<field name="tbvenda_id" class="java.lang.Integer"/>
+		<field name="tbvenda_pagamento" class="java.lang.String"/>
+		<field name="tbvenda_subtotal" class="java.math.BigDecimal"/>
+		<field name="tbvenda_desconto" class="java.math.BigDecimal"/>
+		<field name="tbvenda_taxa" class="java.math.BigDecimal"/>
+		<field name="tbvenda_total" class="java.math.BigDecimal"/>
+		<field name="tbvenda_troco" class="java.math.BigDecimal"/>
+		<field name="tbvenda_data" class="java.lang.String"/>
+		<field name="tbvenda_hora" class="java.lang.String"/>
+		<field name="tbproduto_nome" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="id_venda" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[4]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="tbcliente_nome" class="java.lang.String"/>
+	<field name="tbcliente_telefone" class="java.lang.String"/>
+	<field name="tbitemvenda_quantidade" class="java.lang.Integer"/>
+	<field name="tbitemvenda_preco" class="java.math.BigDecimal"/>
+	<field name="tbitemvenda_total" class="java.math.BigDecimal"/>
+	<field name="tbitemvenda_venda" class="java.lang.Integer"/>
+	<field name="tbvenda_id" class="java.lang.Integer"/>
+	<field name="tbvenda_pagamento" class="java.lang.String"/>
+	<field name="tbvenda_subtotal" class="java.math.BigDecimal"/>
+	<field name="tbvenda_desconto" class="java.math.BigDecimal"/>
+	<field name="tbvenda_taxa" class="java.math.BigDecimal"/>
+	<field name="tbvenda_total" class="java.math.BigDecimal"/>
+	<field name="tbvenda_troco" class="java.math.BigDecimal"/>
+	<field name="tbvenda_data" class="java.lang.String"/>
+	<field name="tbvenda_hora" class="java.lang.String"/>
+	<field name="tbproduto_nome" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="133" splitType="Stretch">
+			<staticText>
+				<reportElement x="358" y="84" width="144" height="49"/>
+				<textElement verticalAlignment="Middle">
+					<font size="24" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[RECIBO N.:]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Bottom">
+				<reportElement x="144" y="0" width="72" height="50"/>
+				<imageExpression><![CDATA["C:\\Users\\gildo\\Documents\\NetBeansProjects\\superMercado1.0\\src\\Icones\\icone 2.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="216" y="0" width="208" height="50" forecolor="#003366"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="36" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[GEN PDV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="57" width="230" height="22"/>
+				<textElement>
+					<font size="14" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Cidade de Maputo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="79" width="230" height="22"/>
+				<textElement>
+					<font size="14" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Contacto: 850386545 / 862653436]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="106" width="230" height="22"/>
+				<textElement>
+					<font size="14" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Email:gildoeugenio5@gmail.com]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="502" y="86" width="100" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbvenda_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="126" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="12" width="70" height="20"/>
+				<textElement>
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Exmo Sr.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="40" width="84" height="20"/>
+				<textElement>
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Telefone:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="7" width="296" height="111"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="14" y="75" width="88" height="30"/>
+				<textElement>
+					<font size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[PAGO EM:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="358" y="24" width="66" height="22"/>
+				<textElement>
+					<font size="14" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Emitido à]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="358" y="66" width="66" height="22"/>
+				<textElement>
+					<font size="14" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[às]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="109" y="12" width="167" height="28"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbcliente_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="109" y="40" width="167" height="26"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbcliente_telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="109" y="75" width="167" height="30"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbvenda_pagamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="358" y="46" width="100" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbvenda_data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="358" y="88" width="100" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbvenda_hora}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="171" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" mode="Opaque" x="0" y="0" width="600" height="166" forecolor="#FFFFFF"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tabela">
+						<datasetParameter name="venda">
+							<datasetParameterExpression><![CDATA[4]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="284">
+						<jr:columnHeader style="table_CH" height="37" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="284" height="35"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[PRODUTO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="46" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="284" height="46"/>
+								<textElement verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbproduto_nome}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110">
+						<jr:columnHeader style="table_CH" height="37" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="110" height="35"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[QUANTIDADE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="46" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="110" height="46"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbitemvenda_quantidade}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:tableFooter style="table_CH" height="167" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="32"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[SUBTOTAL]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="0" y="34" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[DESCONTO]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="0" y="64" width="90" height="32"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[TAXA]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="0" y="96" width="90" height="32"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[TROCO]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="0" y="128" width="90" height="39" forecolor="#006666"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="24" isBold="true"/>
+								</textElement>
+								<text><![CDATA[PAGO]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:columnHeader style="table_CH" height="37" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="35"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[PREÇO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="46" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="46"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbitemvenda_preco}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="116">
+						<jr:tableFooter style="table_CH" height="167" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="116" height="32"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbvenda_subtotal}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="0" y="32" width="116" height="32"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbvenda_desconto}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="0" y="64" width="116" height="32"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbvenda_taxa}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="0" y="96" width="116" height="32"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbvenda_troco}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="0" y="128" width="116" height="39" forecolor="#006666"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="24" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbvenda_total}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="table_CH" height="37" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="116" height="35"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[TOTAL]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="46" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="116" height="46"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="14"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tbitemvenda_total}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="216" y="13" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="296" y="13" width="40" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
